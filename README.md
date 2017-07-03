@@ -41,16 +41,21 @@ IDNUMsNUM__chrCHROM_START_END.png then with flag --filenameinfo the columns of t
 
 USAGE:
 ```
-usage: IGVviewer.py [-h] --dir DIR [--ext EXT] [--filenameinfo]
+usage: IGVviewer.py [-h] --dir DIR [--ext EXT] [--start START] [--filenameinfo]
 
-USAGE: To annotate plot type: y/n/m To go forwards or back a plot type: f/b To
-exit program before end of files type: q
+USAGE: 
+To annotate plot type: y/n/m 
+To go forwards or back a plot type: f/b 
+To get which filenumber we are at: c/count
+To exit program before end of files type: q
 
 optional arguments:
   -h, --help      show this help message and exit
   --dir DIR       directory for IGV images
   --ext EXT       file extension, default is .png
+  --start START   file number to start from (integer), default is 0
   --filenameinfo  bool whether the filename info can be parsed for more info
                   eg in format DDDP103048s118__chr6_27416026_27416126.png
+  --allowcomments bool to allow any comment not just y/n/m or yes/no/maybe
 ```
 
