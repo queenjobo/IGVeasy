@@ -27,6 +27,7 @@ def get_options():
     parser.add_argument('--dir',type = str,help = 'directory for IGV images',required = True)
     parser.add_argument('--ext', type = str, help = "file extension, default is .png", required = False, default = ".png")
     parser.add_argument('--filenameinfo', action = 'store_true', default = False, help = "bool whether the filename info can be parsed for more info eg in format DDDP103048s118__chr6_27416026_27416126.png", required = False)
+    parser.add_argument('--allowcomments',type = bool, help = "allow comments as well!", required = False,default = False, action = 'store_true')
     args = parser.parse_args()
     return(args)
 
@@ -86,7 +87,7 @@ def exit_program(igvfiles,annlist,filenameinfo):
     else:
         print("Not saving.")  
 
-def assess_plots(igvfiles,filenameinfo):
+def assess_plots(igvfiles,filenameinfo,allowcomments):
     '''goes through list of igvfiles and displays image and saves user annotation'''
     tot = len(igvfiles)
     annlist = [None] * tot
@@ -106,6 +107,8 @@ def assess_plots(igvfiles,filenameinfo):
         elif ann == "q":
             break
         #handle wrong user input, stay on same image
+        elif allowcomments:
+            i,annlist = annotate(ann,i,annlist)
         else:
             print("I dont understand...\n" + USAGE_STRING)
     exit_program(igvfiles,annlist,filenameinfo)
@@ -114,7 +117,7 @@ def assess_plots(igvfiles,filenameinfo):
 def main():
     print(USAGE_STRING)
     args = get_options()
-    igvfiles = get_files(args.dir,args.ext)
+    igvfiles = get_files(args.dir,args.ext,args.allowcomments)
     assess_plots(igvfiles,args.filenameinfo)
 
 #------------------SCRIPT-------------------------------
