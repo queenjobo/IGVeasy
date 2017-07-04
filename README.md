@@ -4,7 +4,7 @@ Scripts to easily deal with IGV when looking at trio data
 
 ### IGVplotter.py
 
-IGVplotter is script that can handle both BAMs and CRAMs, when given CRAMs it will extract the regions of interest into BAMs in the same directory as the CRAMS,
+IGVplotter is a script that takes a tab file of variants of interest with the corresponding sample path file along with othe BAMS of interest (eg parents) that can be either BAM or CRAM. When given CRAMs it will extract the regions of interest into BAMs in the same directory as the CRAMS for each sample,
 these will not be deleted automatically. Command to get IGV plots will be submitted as an LSF job.
 
 Requires igv_plotter https://github.com/macarthur-lab/igv_utils/tree/master/igv_plotter
@@ -22,7 +22,7 @@ cd DIRECTORY_FOR_PLOTS
 python IGVplotter.py --tabfile REGIONS.tab [--window 50] [--header] [--iscram] [--makebam]
 
 arguments:
---tabfile This is a a tab delimited file that has the following columnns: ID, PATH_TO_BAMFILE , CHR, POS sorted wrt to ID then creates IGV plots for each given variant
+--tabfile This is a a tab delimited file that has the following columnns: ID, PATH_TO_BAMFILE , CHR, POS sorted wrt to ID then creates IGV plots for each given variant. PATH_TO_BAMFILE can be multiple BAM paths separated by ',' eg CHILD_BAM,FATHER_BAM,MOTHER_BAM if you would like them to appear in the same IGV plot
 --window This is the region in BP that look around variant of interest, default is 50bp
 --header Whether or not the tabfile has a header
 --iscram If the column PATH_TO_BAMFILE is actually a cram file and so will have to use created bamfile
